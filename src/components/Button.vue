@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useMouse }  from '../composables'
 
+export interface IButtonProps { 
+  type: 'default' | 'primary' | 'success' | 'info'
+}
+const props = withDefaults(defineProps<IButtonProps>(), {
+  type:'default'
+})
 
-defineProps<{ type: 'primary' | 'success' | 'info' }>()
+const {x,y} = useMouse()
 
 const count = ref(0)
 </script>
 
 <template>
-  <h1>{{ type }}</h1>
+  <button>{{props.type}}</button>
+  <div>{{x}} {{y}}</div>
 </template>
 
 <style scoped>
