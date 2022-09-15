@@ -7,6 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Button: typeof import('./src/components/button/src/button.vue')['default']
+    RButton: typeof import('../src/components/button')['default']
   }
 }
