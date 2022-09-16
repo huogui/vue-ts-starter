@@ -1,8 +1,15 @@
 <script setup lang="ts">
+import { onMounted,ref, unref } from 'vue'
+
+const button = ref()
+
+onMounted(()=>{
+  console.log(button.value!.firstName)
+})
 </script>
 
 <template>
-    <Button type=""></Button>
+    <Button ref="button"></Button>
 </template>
 
 <style>
