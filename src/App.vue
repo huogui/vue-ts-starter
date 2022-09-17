@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted,ref, unref } from 'vue'
+import { onMounted,ref } from 'vue'
 
 const button = ref()
 
@@ -9,7 +9,11 @@ onMounted(()=>{
 </script>
 
 <template>
-    <Button ref="button"></Button>
+  <el-row><Button ref="button" type="primary">my button</Button></el-row>
+  <el-row><van-button type="primary">vant button</van-button></el-row>
+  <el-row><el-button type="primary">element-plus button</el-button></el-row>
+  <el-row><a-button type="primary">antd button</a-button></el-row>
+  <el-row><n-button type="123">naive button</n-button></el-row>
 </template>
 
 <style>

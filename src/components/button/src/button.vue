@@ -1,14 +1,32 @@
-<script setup lang="ts">
-import { ref,reactive,computed,watch } from 'vue'
-import { useMouse } from '../../../composables'
-import { BT } from './button'
+<script lang="ts">
+  export default {
+    name:"RButton",
+    inheritAttrs:false
+  }
+</script>
 
-const buttonAttrs: BT = reactive({
+
+<script setup lang="ts">
+import { ref,reactive,computed,watch,useAttrs } from 'vue'
+import { useMouse } from '../../../composables'
+// import type { ButtonType } from './button'
+// import { ButtonType } from './button';
+
+
+type  ButtonType =  'default' | 'primary' | 'success' | 'warning' | 'danger'
+
+const buttonProps = defineProps<{
+  type:ButtonType
+}>()
+
+
+const buttonAttrs = reactive({
   title: "+1",
   desc: {
     'x':1
   }
 })
+
 
 
 
@@ -30,9 +48,6 @@ watch(x, (newVal) => {
 
 
 let { foo } = obj
-setInterval(()=>{
-  foo.value += 1 
-},1000)
 
 
 const count = ref(0)
@@ -40,10 +55,8 @@ const state = reactive({
   count
 })
 
-console.log(state.count) // 0
 
 state.count = 1
-console.log(count.value) // 1
 
 const otherCount = ref(2)
 
@@ -51,11 +64,9 @@ const otherCount = ref(2)
 
 const books = reactive([ref('Vue 3 Guide')])
 // 这里需要 .value
-console.log(books[0].value)
 
 const map = reactive(new Map([['count', ref(0)]]))
 // 这里需要 .value
-console.log(map.get('count'))
 
 
 const now = computed(()=>Date.now())
@@ -78,6 +89,10 @@ let fullName = computed<string>({
 fullName.value = '123 456'
 
 
+function increment(){
+  buttonAttrs.desc!.x ++ 
+}
+
 const a = 1
 const b = ref(2)
 
@@ -94,9 +109,10 @@ defineExpose({
   <button @click="add">{{buttonAttrs.title}}</button>
   <div>{{buttonAttrs.desc && buttonAttrs.desc.x}}</div>
   <div>ref:{{count1}} {{foo + 1}}</div>
-  <div @click="increment">count3:{{count3}}</div>
+  <div @click="increment">count3:{{count1}}</div>
   <div>{{now}}</div>
   <div>fullName:{{fullName}}</div>
+  <div>{{buttonProps.type}}</div>
 </template>
 
 <style scoped>
