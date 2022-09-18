@@ -1,17 +1,18 @@
 <script lang="ts">
   export default {
     name:"RButton",
-    inheritAttrs:false
   }
 </script>
 
 
 <script setup lang="ts">
-import { ref,reactive,computed,watch,useAttrs } from 'vue'
+import { ref,reactive,computed,watch,useAttrs, inject } from 'vue'
 import { useMouse } from '../../../composables'
 // import type { ButtonType } from './button'
 // import { ButtonType } from './button';
 
+
+const msg = inject('message')
 
 type  ButtonType =  'default' | 'primary' | 'success' | 'warning' | 'danger'
 
@@ -102,10 +103,21 @@ defineExpose({
 })
 
 
+const vFocus = {
+  mounted:(el:HTMLElement) => {
+    el.focus()
+    setTimeout(()=>{
+      el.blur()
+    },3000)
+  }
+}
+
+
 
 </script>
 
 <template>
+  <slot v-if="$slots.default"></slot>
   <button @click="add">{{buttonAttrs.title}}</button>
   <div>{{buttonAttrs.desc && buttonAttrs.desc.x}}</div>
   <div>ref:{{count1}} {{foo + 1}}</div>
@@ -113,6 +125,9 @@ defineExpose({
   <div>{{now}}</div>
   <div>fullName:{{fullName}}</div>
   <div>{{buttonProps.type}}</div>
+  <h1>{{msg}}</h1>
+  <button></button>
+  <input class="rd-5 w-50 h-10 red" type="text" v-focus>
 </template>
 
 <style scoped>
