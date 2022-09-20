@@ -6,8 +6,22 @@ import {RButton} from './components/button/index';
 provide('message','hello')
 const button = ref()
 
+const loading = ref(false)
+
+const list = ref<number[]>([])
+
+ const load = async () => {
+  loading.value = true;
+      await new Promise((resolve) => {
+        setTimeout(() => {
+         console.log(22222222222)
+        }, 1000);
+      }).finally(() => {
+      });
+ }
+
 onMounted(()=>{
-  console.log(button.value!.firstName)
+  load()
 })
 </script>
 
