@@ -1,36 +1,55 @@
 <script setup lang="ts">
-import { onMounted,ref,provide } from 'vue'
-import {RButton} from './components/button/index';
+import { onMounted, provide, ref } from 'vue'
+import { RButton } from './components/button/index'
 
-
-provide('message','hello')
+provide('message', 'hello')
 const button = ref()
 
 const loading = ref(false)
 
 const list = ref<number[]>([])
 
- const load = async () => {
-  loading.value = true;
-      await new Promise((resolve) => {
-        setTimeout(() => {
-         console.log(22222222222)
-        }, 1000);
-      }).finally(() => {
-      });
- }
+const load = async () => {
+  loading.value = true
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(22222222222)
+    }, 1000)
+  }).finally(() => {
+  })
+}
 
-onMounted(()=>{
+onMounted(() => {
   load()
 })
 </script>
 
 <template>
-  <el-row><r-button ref="button" type="primary">my button</r-button></el-row>
-  <el-row><van-button type="primary">vant button</van-button></el-row>
-  <el-row><el-button type="primary">element-plus button</el-button></el-row>
-  <el-row><a-button type="primary">antd button</a-button></el-row>
-  <el-row><n-button type="primary">naive button</n-button></el-row>
+  <el-row>
+    <RButton ref="button" type="primary">
+      my button
+    </RButton>
+  </el-row>
+  <el-row>
+    <van-button type="primary">
+      vant button
+    </van-button>
+  </el-row>
+  <el-row>
+    <el-button type="primary">
+      element-plus button
+    </el-button>
+  </el-row>
+  <el-row>
+    <a-button type="primary">
+      antd button
+    </a-button>
+  </el-row>
+  <el-row>
+    <n-button type="primary">
+      naive button
+    </n-button>
+  </el-row>
 </template>
 
 <style>
